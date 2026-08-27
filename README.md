@@ -9,7 +9,7 @@
 
 ---
 
-> Implements a preemptive priority scheduler, message queues (strings), semaphores, simulated UART, shell CLI, timer & interrupt simulation, logging and diagnostics — no hardware required.
+> Implements a simulated priority-based scheduler with round-robin selection, message queues (strings), semaphores, simulated UART, shell CLI, timer and interrupt simulation, logging, and diagnostics — no hardware required.
 
 ---
 
@@ -80,13 +80,13 @@ High-level components:
 ```plaintext
 +--------------------------------------------------+
 |                    Shell Task                   |
-| (User Commands: list, send, kill, pause, etc.)   |
+| (User Commands: list, send, status, etc.)         |
 +--------------------------------------------------+
                |              |  
                v              v  
 +---------------------+   +---------------------+
-|   Sensor Reader     |   |    LED Blinker      |
-| (Simulated sensors) |   | (Status LED toggle) |
+|   Network Listener  |   |    LED Blinker      |
+| (Simulated events)  |   | (Status LED toggle) |
 +---------------------+   +---------------------+
                |              ^
                v              |
@@ -142,19 +142,16 @@ clear                      - Clear terminal screen
 ```
 ### Example output
 ``` bash
-===== RTOS Booting =====
-[KERNEL] Task Created: ID=0 | Name=Sensor_Reader | Priority=1
+==== RTOS Boot ====
+[KERNEL] Task Created: ID=0 | Name=NetListener | Priority=1
 [KERNEL] Task Created: ID=1 | Name=Logger | Priority=1
 [KERNEL] Task Created: ID=2 | Name=LED_Blinker | Priority=1
-[KERNEL] Task Created: ID=3 | Name=ShellTask | Priority=2
+[KERNEL] Task Created: ID=3 | Name=ShellTask | Priority=1
+[KERNEL] Task Created: ID=4 | Name=IdleTask | Priority=0
 
 [TICK 0]
-[SCHEDULER] Running task: ShellTask (Priority: 2)
-[SHELL] >> list
-Task[0]: Sensor_Reader | State: READY | Priority: 1
-Task[1]: Logger        | State: READY | Priority: 1
-Task[2]: LED_Blinker   | State: READY | Priority: 1
-Task[3]: ShellTask     | State: RUNNING | Priority: 2
+[SCHEDULER] Running: NetListener (Priority: 1)
+[NET] Sent: Net Event #1
 
 ```
 ---
@@ -165,13 +162,13 @@ This project uses **GitHub Actions** for automated Continuous Integration (CI).
 Every time code is pushed or a pull request is opened, GitHub automatically:
 
 - **Builds** the RTOS Simulator on a fresh environment  
-- **Verifies** that all files compile without errors or warnings  
-- **Confirms** that the build completes successfully on Linux  
+- **Runs** the unit-test suite on Ubuntu and Windows
+- **Runs** a short simulator smoke test on Linux
 
 ---
 
 ### 📌 CI Status  
-![CI Status](https://github.com/hitesh-bhatnagar/Embedded-RTOS-Simulator-C-Learning-Project/actions/workflows/ci.yml/badge.svg)
+![CI Status](https://github.com/Nikhil9783/RTOS-Simulator-Embedded-C-Project/actions/workflows/ci.yml/badge.svg)
 
 ---
 
@@ -220,6 +217,6 @@ This repository is published under the original MIT license with repository-spec
 
 - Export log to file / CSV
 
-- Expand the unit-test harness to cover scheduler, queue, interrupt, timer, semaphore, and UART behavior
+- Add integration tests for the interactive shell and runtime logging
 
 - Port demo tasks to run on a microcontroller (STM32/ESP32) as follow-up project
