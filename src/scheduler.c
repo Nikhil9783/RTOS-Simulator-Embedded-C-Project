@@ -131,7 +131,6 @@ void runScheduler()
   tick() simulates your system tick:
         Increments tickCounter
         Wakes sleeping tasks after their sleepTicks elapse
-        Re‐enables the shell task every 4 ticks
         Calls the timer ISR every 5 ticks
  */
 
@@ -148,13 +147,6 @@ void tick()
             taskList[i].state = TASK_READY;
             printf("[WAKE] %s is now READY\n", taskList[i].taskName);
         }
-    }
-
-    // Shell task assumed to be ID=3; awaken every 4 ticks if blocked
-    if (tickCounter % 4 == 0 &&
-        taskList[3].state == TASK_BLOCKED)
-    {
-        taskList[3].state = TASK_READY;
     }
 
     // Simulate a hardware timer interrupt every 5 ticks

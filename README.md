@@ -44,7 +44,7 @@ This repository is built to teach the core concepts of operating systems and rea
 - **Kernel fundamentals**
   - Task Control Block (TCB) style `Task` structure
   - Task states: `READY`, `RUNNING`, `BLOCKED`, `SLEEPING`, `TERMINATED`
-  - Preemptive priority-based scheduler with round-robin tie-break
+  - Priority-based scheduler with round-robin tie-break
   - Idle task + CPU usage monitoring
 
 - **IPC & sync**
@@ -70,8 +70,8 @@ This repository is built to teach the core concepts of operating systems and rea
 High-level components:
 
 - **main loop**: `tick()` → `runScheduler()` → `sleep/usleep` (simulated)
-- **scheduler**: selects highest-priority READY task, runs it (preemptive)
-- **tick()**: advances sleep counters, triggers shell wakeups and timer ISR
+- **scheduler**: selects the highest-priority READY task and runs it
+- **tick()**: advances sleep counters and triggers the timer ISR
 - **interrupt module**: simple vector table and API to register/trigger ISRs
 - **IPC**: circular queue for string messages
 - **Shell**: user-facing CLI to control runtime

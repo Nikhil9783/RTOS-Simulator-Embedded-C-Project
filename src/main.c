@@ -27,6 +27,15 @@ void task_LED();
 void task_shell();
 void task_idle();
 
+static int findTaskId(const char *name)
+{
+    for (int i = 0; i < taskCount; i++)
+        if (!strcmp(taskList[i].taskName, name))
+            return taskList[i].taskId;
+
+    return -1;
+}
+
 void task_idle(){
     idle_ticks++;
     printf("[IDLE] CPU is idle\n");
@@ -38,7 +47,9 @@ void buttonISR()
 {
     char *m = strdup("INTERRUPT: Button pressed!!!");
     sendMessage(&queue, m);
-    taskList[1].state = TASK_READY; // wake logger
+    int loggerId = findTaskId("Logger");
+    if (loggerId >= 0)
+        taskList[loggerId].state = TASK_READY;
     printf("[INT] Button ISR\n");
 }
 
@@ -201,8 +212,6 @@ void task_shell()
             printf("[SHELL] unkown command\n");
         }
     }
-    // block itself until tick wakes it
-    taskList[3].state = TASK_BLOCKED;
     taskSleep(2);
 }
 
