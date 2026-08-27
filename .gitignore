@@ -8,6 +8,7 @@ test_semaphore
 test_scheduler_priority
 test_uart
 test_log
+test_task
 rtos_log.csv
 build/
 dist/
