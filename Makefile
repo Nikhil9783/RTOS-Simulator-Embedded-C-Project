@@ -2,16 +2,23 @@ CC = gcc
 CFLAGS = -Wall -Iinclude  	# 	Show all warnings & include headers from include/ folder
 
 SRC = src/main.c src/task.c src/scheduler.c src/ipc.c src/uart.c src/semaphore.c src/interrupt.c src/timer.c		# Source files to compile
-OUT = rtos 
+OUT = rtos
 LOG_SRC = src/log.c
 TEST_BINS = test_scheduler test_scheduler_priority test_ipc test_interrupt_timer test_semaphore test_uart test_log
+ifeq ($(OS),Windows_NT)
+CLEAN_FILES = $(OUT).exe $(addsuffix .exe,$(TEST_BINS))
+CLEAN_COMMAND = del /Q
+else
+CLEAN_FILES = $(OUT) $(TEST_BINS)
+CLEAN_COMMAND = rm -f
+endif
 
 all: $(OUT)			# 	Compiles the files into an output file called rtos
 $(OUT): $(SRC) $(LOG_SRC)
 	        $(CC) $(CFLAGS) -o $(OUT) $(SRC) src/log.c
 
 clean: 	# 	Optional target to remove the executable
-	rm -f $(OUT) $(TEST_BINS)
+	-$(CLEAN_COMMAND) $(CLEAN_FILES)
 
 test: $(TEST_BINS)
 	./test_scheduler
