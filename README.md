@@ -3,19 +3,12 @@
 <div align="center">
   
 # ⚡ Embedded RTOS Simulator in C  
-**A Learning Project for Real-Time OS Concepts, Task Scheduling, and Embedded Systems**  
-
-
-![Build Status](https://github.com/Nikhil9783/RTOS-Simulator-Embedded-C-Project/actions/workflows/ci.yml/badge.svg)
-[![GitHub Repo](https://img.shields.io/badge/View%20on-GitHub-blue?style=for-the-badge&logo=github)](https://github.com/Nikhil9783/RTOS-Simulator-Embedded-C-Project)
-[![Made with C](https://img.shields.io/badge/Made%20with-C-00599C?style=for-the-badge&logo=c)](https://en.wikipedia.org/wiki/C_(programming_language))
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+**A Project for Real-Time OS Concepts, Task Scheduling, and Embedded Systems**  
 
 </div>
 
 ---
 
-> **Embedded RTOS Simulator** — small, realistic RTOS kernel written in C for learning and interviews.  
 > Implements a preemptive priority scheduler, message queues (strings), semaphores, simulated UART, shell CLI, timer & interrupt simulation, logging and diagnostics — no hardware required.
 
 ---
