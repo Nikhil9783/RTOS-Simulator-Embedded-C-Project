@@ -220,6 +220,6 @@ This repository is published under the original MIT license with repository-spec
 
 - Export log to file / CSV
 
-- Expand the unit-test harness to cover queues, interrupts, timers, and semaphores
+- Expand the unit-test harness to cover scheduler, queue, interrupt, timer, semaphore, and UART behavior
 
 - Port demo tasks to run on a microcontroller (STM32/ESP32) as follow-up project
