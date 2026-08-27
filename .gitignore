@@ -9,6 +9,7 @@ test_scheduler_priority
 test_uart
 test_log
 test_task
+test_tick
 rtos_log.csv
 build/
 dist/

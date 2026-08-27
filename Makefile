@@ -4,7 +4,7 @@ CFLAGS = -Wall -Iinclude  	# 	Show all warnings & include headers from include/ 
 SRC = src/main.c src/task.c src/scheduler.c src/ipc.c src/uart.c src/semaphore.c src/interrupt.c src/timer.c		# Source files to compile
 OUT = rtos
 LOG_SRC = src/log.c
-TEST_BINS = test_scheduler test_scheduler_priority test_ipc test_interrupt_timer test_semaphore test_uart test_log test_task
+TEST_BINS = test_scheduler test_scheduler_priority test_ipc test_interrupt_timer test_semaphore test_uart test_log test_task test_tick
 ifeq ($(OS),Windows_NT)
 CLEAN_FILES = $(OUT).exe $(addsuffix .exe,$(TEST_BINS))
 CLEAN_COMMAND = del /Q
@@ -29,6 +29,7 @@ test: $(TEST_BINS)
 	./test_uart
 	./test_log
 	./test_task
+	./test_tick
 
 test_scheduler: tests/test_scheduler.c src/task.c src/scheduler.c src/timer.c
 	$(CC) $(CFLAGS) -o $@ $^
@@ -52,4 +53,7 @@ test_log: tests/test_log.c src/log.c
 	$(CC) $(CFLAGS) -o $@ $^
 
 test_task: tests/test_task.c src/task.c src/scheduler.c src/timer.c
+	$(CC) $(CFLAGS) -o $@ $^
+
+test_tick: tests/test_tick.c src/scheduler.c src/timer.c src/task.c
 	$(CC) $(CFLAGS) -o $@ $^
