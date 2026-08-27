@@ -109,6 +109,7 @@ void runScheduler()
     {
         lastSelected = selected;
         currentTaskId = selected;
+        currentTaskIndex = selected;
         taskList[selected].state = TASK_RUNNING;
 
         printf("[SCHEDULER] Running: %s (Priority: %d)\n",
