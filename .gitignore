@@ -2,6 +2,9 @@
 *.o
 *.out
 test_scheduler
+test_ipc
+test_interrupt_timer
+test_semaphore
 build/
 dist/
 .vscode/.browse.VC.db*
