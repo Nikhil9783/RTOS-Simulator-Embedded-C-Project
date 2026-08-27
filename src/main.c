@@ -9,6 +9,7 @@
 #include "semaphore.h"
 #include "interrupt.h"
 #include "timer.h"
+#include "log.h"
 #include "utils.h"
 
 #define MAX_LOG 50
@@ -167,6 +168,13 @@ void task_shell()
             else
                 for (int i = 0; i < logIndex; i++)
                     printf("  [%d] %s\n", i, logBuffer[i]);
+        }
+        else if (!strcmp(cmd, "log export"))
+        {
+            if (exportLogCsv("rtos_log.csv", logBuffer, logIndex) == 0)
+                puts("[SHELL] log exported to rtos_log.csv");
+            else
+                puts("[SHELL] log export failed");
         }
         else if (!strcmp(cmd, "clear"))
         {

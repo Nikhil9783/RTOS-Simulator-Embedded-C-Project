@@ -7,6 +7,8 @@ test_interrupt_timer
 test_semaphore
 test_scheduler_priority
 test_uart
+test_log
+rtos_log.csv
 build/
 dist/
 .vscode/.browse.VC.db*

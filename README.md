@@ -215,7 +215,7 @@ This repository is published under the original MIT license with repository-spec
 
 ### Planned improvements
 
-- Export log to file / CSV
+- Add log rotation for long-running sessions
 
 - Add integration tests for the interactive shell and runtime logging
 

@@ -3,11 +3,12 @@ CFLAGS = -Wall -Iinclude  	# 	Show all warnings & include headers from include/ 
 
 SRC = src/main.c src/task.c src/scheduler.c src/ipc.c src/uart.c src/semaphore.c src/interrupt.c src/timer.c		# Source files to compile
 OUT = rtos 
-TEST_BINS = test_scheduler test_scheduler_priority test_ipc test_interrupt_timer test_semaphore test_uart
+LOG_SRC = src/log.c
+TEST_BINS = test_scheduler test_scheduler_priority test_ipc test_interrupt_timer test_semaphore test_uart test_log
 
 all: $(OUT)			# 	Compiles the files into an output file called rtos
-$(OUT): $(SRC)
-	$(CC) $(CFLAGS) -o $(OUT) $(SRC)
+$(OUT): $(SRC) $(LOG_SRC)
+	        $(CC) $(CFLAGS) -o $(OUT) $(SRC) src/log.c
 
 clean: 	# 	Optional target to remove the executable
 	rm -f $(OUT) $(TEST_BINS)
@@ -19,6 +20,7 @@ test: $(TEST_BINS)
 	./test_interrupt_timer
 	./test_semaphore
 	./test_uart
+	./test_log
 
 test_scheduler: tests/test_scheduler.c src/task.c src/scheduler.c src/timer.c
 	$(CC) $(CFLAGS) -o $@ $^
@@ -36,4 +38,7 @@ test_semaphore: tests/test_semaphore.c src/semaphore.c src/task.c src/scheduler.
 	$(CC) $(CFLAGS) -o $@ $^
 
 test_uart: tests/test_uart.c src/uart.c
+	$(CC) $(CFLAGS) -o $@ $^
+
+test_log: tests/test_log.c src/log.c
 	$(CC) $(CFLAGS) -o $@ $^
