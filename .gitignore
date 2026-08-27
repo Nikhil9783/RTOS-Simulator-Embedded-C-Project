@@ -1,0 +1,7 @@
+*.exe
+*.o
+*.out
+build/
+dist/
+.vscode/.browse.VC.db*
+.vscode/ipch/
